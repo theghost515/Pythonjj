@@ -1,12 +1,15 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MainTabNavigator from "@/navigation/MainTabNavigator";
-import ModalScreen from "@/screens/ModalScreen";
+import LessonDetailScreen from "@/screens/LessonDetailScreen";
+import ExerciseScreen from "@/screens/ExerciseScreen";
 import { useScreenOptions } from "@/hooks/useScreenOptions";
+import { Lesson, Exercise } from "@/data/lessons";
 
 export type RootStackParamList = {
   Main: undefined;
-  Modal: undefined;
+  LessonDetail: { lesson: Lesson };
+  Exercise: { exercise: Exercise };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -22,11 +25,23 @@ export default function RootStackNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Modal"
-        component={ModalScreen}
+        name="LessonDetail"
+        component={LessonDetailScreen}
         options={{
           presentation: "modal",
-          headerTitle: "Modal",
+          headerTitleStyle: {
+            fontFamily: "Tajawal_700Bold",
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Exercise"
+        component={ExerciseScreen}
+        options={{
+          presentation: "modal",
+          headerTitleStyle: {
+            fontFamily: "Tajawal_700Bold",
+          },
         }}
       />
     </Stack.Navigator>
